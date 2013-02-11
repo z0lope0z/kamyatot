@@ -1,30 +1,29 @@
-package com.lopefied.kamyatot.fragment.adapter;
 
-import java.util.List;
+package com.lopefied.kamyatot.fragment.adapter;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.lopefied.kamyatot.fragment.PhotoFragment;
-import com.lopefied.kamyatot.model.Photo;
+import com.lopefied.kamyatot.fragment.KamyaFragment;
+import com.lopefied.kamyatot.model.ThatsAllEnum;
 
+/**
+ * @author Lope Chupijay Emano
+ */
 public class ViewPhotoFragmentAdapter extends FragmentStatePagerAdapter {
-    private List<Photo> photos;
 
-    public ViewPhotoFragmentAdapter(FragmentManager fm, List<Photo> photos) {
+    public ViewPhotoFragmentAdapter(FragmentManager fm) {
         super(fm);
-        this.photos = photos;
     }
 
     @Override
-    public Fragment getItem(int i) {
-        Fragment fragment = new PhotoFragment();
-        if (i < getCount()) {
+    public Fragment getItem(int position) {
+        Fragment fragment = new KamyaFragment();
+        if (position < getCount()) {
             Bundle args = new Bundle();
-//            args.putString(PhotoFragment.ARG_IMAGE_URL, photos.get(i)
-//                    .getPhotoURL());
+            args.putString(KamyaFragment.ARG_TEXT, ThatsAllEnum.values()[position].lyrics);
             fragment.setArguments(args);
         }
         return fragment;
@@ -32,7 +31,7 @@ public class ViewPhotoFragmentAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return photos.size();
+        return ThatsAllEnum.values().length;
     }
 
 }
